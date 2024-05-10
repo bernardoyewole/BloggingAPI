@@ -14,6 +14,7 @@ namespace Entities.Context
         public DbSet<Comment> Comments { get; set; }
         public DbSet<Post> Posts { get; set; }
     }
+
     public interface IDbContext : IDisposable
     {
         DbSet<TEntity> Set<TEntity>() where TEntity : class;

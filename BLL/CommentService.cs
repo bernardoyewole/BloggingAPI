@@ -23,6 +23,7 @@ namespace BLL
     {
         private readonly ICommentRepository _commentRepository;
 
+        // commentRepository dependency injection
         public CommentService(ICommentRepository commentRepository)
         {
             _commentRepository = commentRepository;

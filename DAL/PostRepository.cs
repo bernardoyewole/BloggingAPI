@@ -23,16 +23,19 @@ namespace DAL
     {
         private readonly IBlogManagementContext _blogManagementContext;
 
+        // context class dependency injection
         public PostRepository(IBlogManagementContext blogManagementContext)
         {
             _blogManagementContext = blogManagementContext;
         }
 
+        // returns all posts from database
         public async Task<List<Post>> GetPosts()
         {
             return await _blogManagementContext.Posts.ToListAsync();
         }
 
+        // returns a specific post based on its id
         public async Task<Post> GetPostById(int id)
         {
             Post post = await _blogManagementContext.Posts.FindAsync(id);
@@ -44,6 +47,7 @@ namespace DAL
             return null;
         }
 
+        // adds post to database
         public async Task<bool> AddPost(Post post)
         {
             if (post != null)
@@ -55,6 +59,7 @@ namespace DAL
             return false;
         }
 
+        // updates post in database
         public async Task<bool> UpdatePost(Post post)
         {
             if (post != null)
@@ -66,6 +71,7 @@ namespace DAL
             return false;
         }
 
+        // removes post from database
         public async Task<bool> DeletePost(int id)
         {
             Post post = await _blogManagementContext.Posts.FindAsync(id);

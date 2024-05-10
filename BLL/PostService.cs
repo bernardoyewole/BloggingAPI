@@ -15,6 +15,7 @@ namespace BLL
     {
         private readonly IPostRepository _postRepository;
 
+        // postRepository dependency injection
         public PostService(IPostRepository postRepository)
         {
             _postRepository = postRepository;

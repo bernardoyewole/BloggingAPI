@@ -14,12 +14,14 @@ namespace BloggingAPI.Controllers
         private readonly IPostService _postService;
         private readonly IMapper _mapper;
 
+        // postService and mapper dependency injection
         public PostsController(IPostService postService, IMapper mapper)
         {
             _postService = postService;
             _mapper = mapper;
         }
 
+        // returns all posts
         [HttpGet]
         public async Task<IActionResult> GetPosts()
         {
@@ -29,6 +31,7 @@ namespace BloggingAPI.Controllers
             return Ok(posts);
         }
 
+        // returns post with a specific id
         [HttpGet]
         [Route("{Id}")]
         public async Task<IActionResult> GetPostsById(int Id)
@@ -45,6 +48,7 @@ namespace BloggingAPI.Controllers
             }
         }
 
+        // handles adding post to database
         [HttpPost]
         public async Task<IActionResult> AddPosts(Post post)
         {
@@ -52,6 +56,7 @@ namespace BloggingAPI.Controllers
             return Ok("Post Added Successfully");
         }
 
+        // handles updating posts
         [HttpPut]
         public async Task<IActionResult> UpdatePosts(Post post)
         {
@@ -59,6 +64,7 @@ namespace BloggingAPI.Controllers
             return Ok("Post updated successfully");
         }
 
+        // handles deleting posts
         [HttpDelete]
         [Route("{Id}")]
         public async Task<IActionResult> DeletePosts(int Id)

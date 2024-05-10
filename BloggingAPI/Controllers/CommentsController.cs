@@ -14,12 +14,14 @@ namespace BloggingAPI.Controllers
         private readonly ICommentService _commentService;
         private readonly IMapper _mapper;
 
+        // commentService and mapper dependency injection
         public CommentsController(ICommentService commentService, IMapper mapper)
         {
             _commentService = commentService;
             _mapper = mapper;
         }
 
+        // returns all comments
         [HttpGet]
         public async Task<IActionResult> GetComments()
         {
@@ -29,6 +31,7 @@ namespace BloggingAPI.Controllers
             return Ok(comments);
         }
 
+        // returns comments with a particular id
         [HttpGet]
         [Route("{Id}")]
         public async Task<IActionResult> GetCommentsById(int Id)
@@ -46,6 +49,8 @@ namespace BloggingAPI.Controllers
             }
         }
 
+
+        // returns comment based on its post id
         [HttpGet]
         [Route("Post/{PostId}")]
         public async Task<IActionResult> GetCommentsByPostId(int PostId)
@@ -62,6 +67,7 @@ namespace BloggingAPI.Controllers
             }
         }
 
+        // handles adding comment to database
         [HttpPost]
         public async Task<IActionResult> AddComments(Comment comment)
         {
@@ -69,6 +75,7 @@ namespace BloggingAPI.Controllers
             return Ok("Comment Added Successfully");
         }
 
+        // handles updating comment in database
         [HttpPut]
         public async Task<IActionResult> UpdateComments(Comment comment)
         {
@@ -76,6 +83,7 @@ namespace BloggingAPI.Controllers
             return Ok("Comment updated successfully");
         }
 
+        // removes comment from database
         [HttpDelete]
         [Route("{Id}")]
         public async Task<IActionResult> DeleteComments(int Id)
@@ -87,6 +95,7 @@ namespace BloggingAPI.Controllers
             return BadRequest();
         }
 
+        // removes comments associated with a specific post
         [HttpDelete]
         [Route("Post/{PostId}")]
         public async Task<IActionResult> DeleteCommentsByPostId(int PostId)

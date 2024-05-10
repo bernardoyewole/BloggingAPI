@@ -20,16 +20,19 @@ namespace DAL
     {
         private readonly IBlogManagementContext _blogManagementContext;
 
+        // context dependency injection
         public CommentRepository(IBlogManagementContext blogManagementContext)
         {
             _blogManagementContext = blogManagementContext;
         }
 
+        // returns all comments from database
         public async Task<List<Comment>> GetComments()
         {
             return await _blogManagementContext.Comments.ToListAsync();
         }
 
+        // returns a comment based on its id
         public async Task<Comment> GetCommentById(int id)
         {
             Comment comment = await _blogManagementContext.Comments.FindAsync(id);
@@ -41,12 +44,14 @@ namespace DAL
             return null;
         }
 
+        // returns comments for a specific post
         public async Task<List<Comment>> GetCommentsByPostId(int id)
         {
             List<Comment> commentsByPost= await _blogManagementContext.Comments.Where(x => x.PostId == id).ToListAsync();
             return commentsByPost;
         }
 
+        // adds comment to database
         public async Task<bool> AddComment(Comment comment)
         {
             if (comment != null)
@@ -58,6 +63,7 @@ namespace DAL
             return false;
         }
 
+        // updates comment in database
         public async Task<bool> UpdateComment(Comment comment)
         {
             if (comment != null)
@@ -69,6 +75,7 @@ namespace DAL
             return false;
         }
 
+        // removes comment from database
         public async Task<bool> DeleteComment(int id)
         {
             Comment comment = await _blogManagementContext.Comments.FindAsync(id);
@@ -82,6 +89,7 @@ namespace DAL
             return false;
         }
 
+        // removes comments for a particular post from database
         public async Task<bool> DeleteCommentsByPost(int id)
         {
             List<Comment> commentsByPost = await _blogManagementContext.Comments.Where(x => x.PostId == id).ToListAsync();
